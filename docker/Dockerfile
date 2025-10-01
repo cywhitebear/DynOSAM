@@ -31,7 +31,10 @@ RUN apt-get install \
 RUN apt-get install ros-humble-vision-opencv
 
 # other deps
-RUN apt-get install libpng++-dev/focal nlohmann-json3-dev/focal
+# RUN apt-get install libpng++-dev/focal nlohmann-json3-dev/focal
+RUN apt-get update && apt-get install -y \
+    libpng++-dev \
+    nlohmann-json3-dev
 
 RUN python3 -m pip install pylatex evo setuptools pre-commit scipy argcomplete black pre-commit
 
@@ -46,12 +49,14 @@ RUN apt-get update && apt-get install -y \
       libjpeg-dev libpng-dev libpng++-dev libtiff-dev libgtk2.0-dev \
       libatlas-base-dev gfortran
 
-RUN git clone https://github.com/opencv/opencv.git
+# RUN git clone https://github.com/opencv/opencv.git
+RUN git clone --depth 1 --branch 4.8.0 https://github.com/opencv/opencv.git
 RUN cd opencv && \
       git checkout tags/4.8.0 && \
       mkdir build
 
-RUN git clone https://github.com/opencv/opencv_contrib.git
+# RUN git clone https://github.com/opencv/opencv_contrib.git
+RUN git clone --depth 1 --branch 4.8.0 https://github.com/opencv/opencv_contrib.git
 RUN cd opencv_contrib && \
       git checkout tags/4.8.0
 
@@ -64,8 +69,8 @@ RUN cd opencv/build && \
       -DOPENCV_EXTRA_MODULES_PATH=/root/opencv_contrib/modules .. && \
       make -j$(nproc) install
 
-
-RUN clone git@github.com:MIT-SPARK/config_utilities.git
+# RUN git clone git@github.com:MIT-SPARK/config_utilities.git
+RUN git clone --depth 1 https://github.com/MIT-SPARK/config_utilities.git
 RUN cd config_utilities/config_utilities && mkdir build && \
       cd build && \
       cmake .. && make -j$(nproc) install
@@ -74,7 +79,8 @@ RUN cd config_utilities/config_utilities && mkdir build && \
 
 # Install GTSAM
 RUN apt-get update && apt-get install -y libboost-all-dev libtbb-dev
-RUN git clone https://github.com/borglab/gtsam.git
+# RUN git clone https://github.com/borglab/gtsam.git
+RUN git clone --depth 1 --branch 4.2.0 https://github.com/borglab/gtsam.git
 RUN cd gtsam && \
     git fetch && \
     git checkout tags/4.2.0 && \
@@ -87,7 +93,8 @@ RUN cd gtsam && \
 
 
 # Install Open_GV
-RUN git clone https://github.com/MIT-SPARK/opengv
+# RUN git clone https://github.com/MIT-SPARK/opengv
+RUN git clone --depth 1 https://github.com/MIT-SPARK/opengv.git
 RUN cd opengv && \
       mkdir build
 RUN cd opengv/build && \
