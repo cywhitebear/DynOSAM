@@ -845,7 +845,7 @@ VirtualKittiDataLoader::VirtualKittiDataLoader(const fs::path& dataset_path,  co
     const std::string depth_folder = path + "/" + v_depth_folder + "/" + scene + "/" + scene_type + "/frames/depth/Camera_0";
     const std::string forward_flow_folder = path + "/" + v_forward_flow_folder + "/" + scene + "/" + scene_type + "/frames/forwardFlow/Camera_0";
     const std::string backward_flow_folder = path + "/" + v_backward_flow_folder + "/" + scene + "/" + scene_type + "/frames/backwardFlow/Camera_0";
-    const std::string forward_scene_flow_folder = path + "/" + v_forward_scene_flow_folder + "/" + scene + "/" + scene_type + "/frames/forwardsceneFlow/Camera_0";
+    const std::string forward_scene_flow_folder = path + "/" + v_forward_scene_flow_folder + "/" + scene + "/" + scene_type + "/frames/forwardSceneFlow/Camera_0";
     const std::string class_semantics_folder = path + "/" + v_class_semantics_folder + "/" + scene + "/" + scene_type + "/frames/classSegmentation/Camera_0";
     const std::string instance_segmentation_folder = path + "/" + v_instance_segmentation_folder + "/" + scene + "/" + scene_type + "/frames/instanceSegmentation/Camera_0";
     const std::string rgb_folder = path + "/" + v_rgb_folder + "/" + scene + "/" + scene_type + "/frames/rgb/Camera_0";
@@ -950,7 +950,7 @@ void VirtualKittiDataLoader::setCameraParams() {
     CameraParams::DistortionCoeffs distortion({ 0, 0, 0, 0 });
 
     cv::Size image_size(1242, 375);
-    camera_params_= CameraParams(intrinsics, distortion, image_size, "radial-tangential");
+    camera_params_= CameraParams(intrinsics, distortion, image_size, "radial_tangential");
 }
 
 

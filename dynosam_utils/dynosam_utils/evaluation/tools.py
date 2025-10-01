@@ -49,7 +49,7 @@ def so3_from_euler(euler_angles: np.ndarray, order:str = "xyz", degrees: bool = 
 
 def so3_from_xyzw(quaternion: np.ndarray) -> np.ndarray:
     from scipy.spatial.transform import Rotation as R
-    return R.from_quat(quaternion, scalar_first=False).as_matrix()
+    return R.from_quat(quaternion).as_matrix()
 
 def load_pose_from_row(row) -> Tuple[np.ndarray, np.ndarray]:
 
